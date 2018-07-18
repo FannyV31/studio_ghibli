@@ -7,14 +7,18 @@ class Movies extends Component {
       return (
         <Movie
           key={movie._id}
-          movie={movie}/>
+          movie={movie}
+          editingMovieId={this.props.editingMovieId}
+          onEditMovie={this.props.onEditMovie}
+          onDeleteMovie={this.props.onDeleteMovie}
+          onUpdateMovie={this.props.onUpdateMovie}/>
       )
     })
     return(
       <div className="movies">
         {movies}
       </div>
-    )
+    )  
   }
 }
 

@@ -3,13 +3,19 @@ import MovieModel from '../models/Movie'
 import Movies from '../components/Movies'
 import CreateMovieForm from '../components/CreateMovieForm'
 
+
 class MoviesContainer extends Component {
   constructor(){
     super()
     this.state = {
-      movies: []
+      movies: [],
+      editingMovieId: null,
+      editing: false
     }
     this.createMovie = this.createMovie.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
+    this.updateMovie = this.updateMovie.bind(this);
+    this.editMovie = this.editMovie.bind(this);
   }
   componentDidMount(){
     this.fetchData()
@@ -17,7 +23,7 @@ class MoviesContainer extends Component {
   fetchData(){
     MovieModel.all().then( (res) => {
       this.setState ({
-        movies: res.data.movies,
+        movies: res.data,
         movie: ''
       })
     })
@@ -34,25 +40,50 @@ class MoviesContainer extends Component {
       this.setState({newMovies})
     })
   }
+
+  deleteMovie(movie) {
+    MovieModel.delete(movie).then((res) => {
+        let movies = this.state.movies.filter(function(movie) {
+          return movie.id !== res.data.id
+        });
+        this.setState({movies})
+    })
+  }
+  updateMovie(movieBody) {
+    var movieId = this.state.editingMovieId
+    function isUpdatedMovie(movie) {
+        return movie.id === movieId;
+    }
+    MovieModel.update(movieId, movieBody).then((res) => {
+        let movies = this.state.movies
+        movies.find(isUpdatedMovie).body = movieBody
+        this.setState({movies: movies, editingMovieId: null, editing: false})
+    })
+}
+editMovie(movie){
+  this.setState({
+    editingMovieId: movie.id,
+    editing: true
+  })
+}
   render(){
-    return(
-    <div>
-    {MovieModel.all().then( (res) => {
-      console.log(res)
       return (
-        <div className='moviesContainer'>
+        <div className='moviesComponent'>
+
           <h2>This is a movies container</h2>
+
           <Movies
             movies={this.state.movies} />
+            editingMovieId={this.state.editingMovieId}
+            onEditMovie={this.editMovie}
+            onDeleteMovie={this.deleteMovie} 
+            onUpdateMovie={this.updateMovie} />
+
           <CreateMovieForm
-            createMovie={ this.createMovie }
-        />
-        </div>
-        // </div>
-      )}
-    )}
-    </div>
-    )
+            createMovie={ this.createMovie }/>
+
+          </div>
+      )
   }
 }
   
