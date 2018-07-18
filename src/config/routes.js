@@ -6,7 +6,7 @@ import MoviesContainer from '../containers/MoviesContainer';
 export default (
   <Switch>
     <Route exact path='/' component={ Home }/>
-    <Route path='./containers/MoviesContainer' component={ MoviesContainer }/>
+    <Route path='/allmovies' component={ MoviesContainer }/>
   </Switch>
 )
 

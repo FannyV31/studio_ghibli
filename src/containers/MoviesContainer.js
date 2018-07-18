@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import MovieModel from '../models/Movie'
 import Movies from '../components/Movies'
+import CreateMovieForm from '../components/CreateMovieForm'
 
 class MoviesContainer extends Component {
   constructor(){
@@ -8,6 +9,7 @@ class MoviesContainer extends Component {
     this.state = {
       movies: []
     }
+    this.createMovie = this.createMovie.bind(this);
   }
   componentDidMount(){
     this.fetchData()
@@ -20,15 +22,33 @@ class MoviesContainer extends Component {
       })
     })
   }
+  
+  createMovie(movie) {
+    let newMovie = {
+      body: movie,
+      completed: false
+    }
+    MovieModel.create(newMovie).then((res) => {
+      let movies = this.state.movies
+      let newMovies = movies.push(res.data)
+      this.setState({newMovies})
+    })
+  }
   render(){
     return(
     <div>
     {MovieModel.all().then( (res) => {
       console.log(res)
       return (
-        <div className="MoviesComponent">
-          <Movies movies={this.state.movies} />
+        <div className='moviesContainer'>
+          <h2>This is a movies container</h2>
+          <Movies
+            movies={this.state.movies} />
+          <CreateMovieForm
+            createMovie={ this.createMovie }
+        />
         </div>
+        // </div>
       )}
     )}
     </div>
