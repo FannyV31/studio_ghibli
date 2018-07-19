@@ -188,42 +188,56 @@ const movies = [
     rt_score: "92"
   },
 ]
+function searchingFor(term) {
+  return function(x) {
+    return x.title.toLowerCase().includes(term.toLowerCase()) || !term;
+    return x.id.toLowerCase().includes(term.toLowerCase()) || !term;
+    return x.description.toLowerCase().includes(term.toLowerCase()) || !term;
+    return x.director.toLowerCase().includes(term.toLowerCase()) || !term;
+    return x.producer.toLowerCase().includes(term.toLowerCase()) || !term;
+    return x.release_date.toLowerCase().includes(term.toLowerCase()) || !term;
+    return x.rt_score.toLowerCase().includes(term.toLowerCase()) || !term;
+  }
+}
+
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-    filterString: '',   
+      movies: movies,
+      term: '',  
     }
+    this.searchHandler = this.searchHandler.bind(this);
   }
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({filterString: 'weekly'});
-    }, 2000);
+
+  searchHandler(event){
+    this.setState({ term:event.target.value})
   }
-  
   render() {
+    const {term, movies} = this.state;
     return (
       <div className="App">
       <form>
-        <input type="text"/>
+        <input type="text"
+                      onChange={this.searchHandler}
+                      value={term}
+        />
       </form>
         <Header/>
         {
-          movies.map(function(movie){
-            return(
-              <div>
-                <h1> {movies.id} </h1>
+          movies.filter(searchingFor(term)).map( movie =>
+            <div key={movies.id}>
                 <h1>{movies.title}</h1>
                 <h1>{movies.description}</h1>
                 <h1>{movies.director}</h1>
                 <h1>{movies.producer}</h1>
                 <h1>{movies.release_date}</h1>
                 <h1>{movies.rt_score}</h1>
-              </div>
+            </div>
             )
-          })
-        }
+          }
+        
         { MyRoutes }
           <h1 className="App-title">Welcome Studio Ghibli fans and fanatics!</h1>
           <header className="App-header">
