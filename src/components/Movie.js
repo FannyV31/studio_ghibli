@@ -25,6 +25,9 @@ class Movie extends Component {
 
         <span>{this.props.movie.title}</span>
         <span>{this.props.movie.release_date}</span>
+        <span>{this.props.movie.director}</span>
+        {/* <span>{this.props.movie.id}</span> */}
+
         <p>{this.props.movie.description}</p>
 
 

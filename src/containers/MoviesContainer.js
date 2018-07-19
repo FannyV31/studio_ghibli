@@ -73,7 +73,7 @@ editMovie(movie){
           <h2>This is a movies container</h2>
 
           <Movies
-            movies={this.state.movies} />
+            movies={this.state.movies}
             editingMovieId={this.state.editingMovieId}
             onEditMovie={this.editMovie}
             onDeleteMovie={this.deleteMovie} 
