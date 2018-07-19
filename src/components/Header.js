@@ -7,6 +7,14 @@ class Header extends Component{
       <header>
         <Link to={'/'}>Home</Link>
         <Link to={'/allmovies'}>Movies</Link>
+        <form>
+        <input 
+          type="text"
+          onChange={this.props.searchHandler}
+          value={this.props.term}
+          placeholder={'Search Title'}
+        />
+      </form>
       </header>
     )
   }
