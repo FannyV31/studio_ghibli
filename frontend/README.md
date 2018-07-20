@@ -2442,3 +2442,24 @@ In the future, we might start automatically compiling incompatible third-party m
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+
+User Stories:
+
+This site pulls information from the Studio Ghibli API. It is designed for fans and fanatics of Studio Ghibli films so that they can comment on specific films and have lively discussions about the films and philosophical reflections on life. 
+
+Ideally, I would have Login Authorization set up as well as implement the ability for users to initiate comments and to make comments on comments. 
+
+The site is set up very simply with a Studio Ghibli icon, a search bar and a welcome message that says, "Welcome Studio Ghibli fans and fanatics!" Currently it is set up so that users can search movie titles but future iterations will allow for other search types as well, such as release date, producer, director, description words, etc. 
+
+wireframe:
+https://cl.ly/34212y1l3911
+
+ERD: 
+https://cl.ly/3g2B3n0R0e1y
+
+
+
+
+
+
+
