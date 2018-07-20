@@ -77,8 +77,7 @@ editMovie(movie){
             editingMovieId={this.state.editingMovieId}
             onEditMovie={this.editMovie}
             onDeleteMovie={this.deleteMovie} 
-            onUpdateMovie={this.updateMovie}
-            term={this.props.term} />
+            onUpdateMovie={this.updateMovie} />
 
           <CreateMovieForm
             createMovie={ this.createMovie }/>
